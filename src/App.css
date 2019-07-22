@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -30,4 +30,49 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+html {
+  margin: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: auto;
+  padding: 0;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Open Sans', sans-serif;
+  /* min-height: 100vh; */
+  overflow: hidden;
+}
+
+#page-wrapper {
+  width: 100%;
+  display: block;
+}
+
+#imgs-wrapper {
+  /* position: relative; */
+}
+
+
+#background-img, #cat-img, #dog-img, #child-img {
+  position: absolute;
+}
+
+#cat-img {
+  height: 100px;
+}
+
+#dog-img {
+  height: 100px;
+}
+
+#child-img {
+  height: 100px;
 }
