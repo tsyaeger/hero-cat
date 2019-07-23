@@ -1,6 +1,7 @@
 import React from 'react';
 import dog from './dog-svg-2/dog-svg-2-transparent.png'
 
+
 const Dog = ({positions}) => {
 
   return (
@@ -11,7 +12,7 @@ const Dog = ({positions}) => {
         top: positions.top,
         left: positions.left,
         backgroundImage: `url('${dog}')`,
-        backgroundPosition: '-20, 20',
+        backgroundPosition: '0, 0',
         backgroundSize: '150px 150px',
         overflow: 'hidden',
         padding: 0,

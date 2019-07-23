@@ -4,9 +4,7 @@ import child from './clip-lip-child-3/clip-lip-child-3-transparent.png'
 
 const Child = ({positions}) => {
 
-  const imgStyle = {
-    maxWidth: '100px'
-  }
+  console.log('child pos',positions)
 
   return (
     <div
