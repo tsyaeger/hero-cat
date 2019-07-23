@@ -13,12 +13,13 @@ const Dog = ({positions}) => {
         left: positions.left,
         backgroundImage: `url('${dog}')`,
         backgroundPosition: '0, 0',
-        backgroundSize: '150px 150px',
+        backgroundSize: '100px 100px',
         overflow: 'hidden',
         padding: 0,
         margin: 0,
-        width: '150px',
-        height: '150px'
+        width: '100px',
+        height: '100px',
+        transform: `scaleX(${positions.direction})`
       }}
     />
 

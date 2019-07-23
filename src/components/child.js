@@ -4,8 +4,6 @@ import child from './clip-lip-child-3/clip-lip-child-3-transparent.png'
 
 const Child = ({positions}) => {
 
-  console.log('child pos',positions)
-
   return (
     <div
       id='child-wrapper'
@@ -15,12 +13,13 @@ const Child = ({positions}) => {
         left: positions.left,
         backgroundImage: `url('${child}')`,
         backgroundPosition: '20, -20',
-        backgroundSize: '90px 90px',
+        backgroundSize: '70px 70px',
         overflow: 'hidden',
         padding: 0,
         margin: 0,
-        width: '90px',
-        height: '90px'
+        width: '70px',
+        height: '70px',
+        scaleX: '-1'
       }}
     />
   )

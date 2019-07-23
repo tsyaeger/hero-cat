@@ -21,26 +21,26 @@ const getDefaultState = () => {
     positions: {
       cat: {
         top: 485,
-        left: 941
+        left: 941,
+        direction: 1
       },
       dog: {
         top: half,
-        left: -200
+        left: -200,
+        direction: 1
       },
       child: {
-        top: 260,
-        left: half,
+        top: 360,
+        left: 600,
         dirCount: 0,
         currentDirection: 'UP'
       }
     },
-    childSpeed: 30,
-    dogSpeed: 50
+    childSpeed: 20,
+    dogSpeed: 30
   }
 }
 
-//max top 470
-//max left 1500
 
 class Game extends Component {
   constructor(props){
@@ -52,7 +52,7 @@ class Game extends Component {
     let status
     if(this.state.gameOn == false){
       this.childInterval = setInterval(this.updateChildPosition, 50);
-      this.dogInterval = setInterval(this.updateDogPosition, 200);
+      this.dogInterval = setInterval(this.updateDogPosition, 100);
       status = 'ON'
     }
     else{
@@ -68,16 +68,16 @@ class Game extends Component {
 
 
   updateChildPosition = () => {
-    const maxDirCount = 15
+    const maxDirCount = 7
     const { childSpeed, positions: { child, dog }, size: { playerSize, maxDim }} = this.state;
     let direction = (child.dirCount >= maxDirCount) ? this.getRandomDirection() : child.currentDirection
 
     //handle boundaries
-    if(child.top >= 550){
-      direction = 'UP'
+    if(child.top >= 620){
+      direction = 'UP-LEFT'
     }
-    else if(child.top <= 240){
-      direction = 'DOWN'
+    else if(child.top <= 350){
+      direction = 'DOWN-RIGHT'
     }
     else if(child.left <= -100){
       direction = 'RIGHT'
@@ -132,7 +132,7 @@ class Game extends Component {
 
 
   getRandomDirection = () => {
-    const dirs = ['DOWN','LEFT','RIGHT', 'UP-RIGHT', 'UP-LEFT', 'DOWN-RIGHT', 'DOWN-LEFT'];
+    const dirs = ['LEFT','RIGHT', 'UP-RIGHT', 'UP-LEFT', 'DOWN-RIGHT', 'DOWN-LEFT'];
     const dirIx = Math.floor(Math.random() * Math.floor(dirs.length));
     return dirs[dirIx]
   }
@@ -144,6 +144,7 @@ class Game extends Component {
     const findNewDogPosition = () => {
       dog.top = (child.top < dog.top) ? dog.top - 20 : dog.top + 20
       dog.left = (child.left < dog.left) ? dog.left - 20 : dog.left + 20
+      dog.direction = (child.left < dog.left) ? 1 : -1
       return dog
     }
 
@@ -153,6 +154,42 @@ class Game extends Component {
         dog: findNewDogPosition()
       }
     });
+  }
+
+  handleCatMovement = (dirObj) => {
+    const { top, left } = this.state.positions.cat;
+    const newDirection = (dirObj.direction) ? dirObj.direction : this.state.positions.cat.direction
+    this.setState({
+      positions: {
+        ...this.state.positions,
+        cat: {
+          top: top + dirObj.top,
+          left: left +  dirObj.left,
+          direction: newDirection
+        }
+      }
+    }, this.handleCollision());
+  }
+
+  handleCollision = () => {
+    const { cat, dog } = this.state.positions;
+    let leftMatch = false
+    let topMatch = false
+
+    if(Math.abs(cat.left - dog.left) < 20){
+      leftMatch = true
+    }
+    if(Math.abs(cat.top - (dog.top + 80)) < 20){
+      topMatch = true
+    }
+
+    console.log(leftMatch)
+    console.log(topMatch)
+
+    if(leftMatch && topMatch){
+      alert("hero cat")
+      alert(`$`)
+    }
   }
 
   componentDidMount(){
@@ -167,8 +204,14 @@ class Game extends Component {
     return(
       <div id='imgs-wrapper'>
         <Background />
-        <Cat positions={this.state.positions.cat} changeGameStatus={this.changeGameStatus}/>
-        <Dog positions={this.state.positions.dog}/>
+        <Cat
+          positions={this.state.positions.cat}
+          changeGameStatus={this.changeGameStatus}
+          handleCatMovement={this.handleCatMovement}
+        />
+        <Dog
+          positions={this.state.positions.dog}
+        />
         <Child positions={this.state.positions.child}/>
       </div>
     )
