@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { UP, DOWN, LEFT, RIGHT } from './../helpers/constants';
+import Status from './status'
 import Background from './background'
 import Cat from './cat';
 import Dog from './dog';
@@ -10,9 +11,10 @@ const getDefaultState = () => {
   const boardSize = 25
   const playerSize = 25
   const half = Math.floor(boardSize / 2) * playerSize;
-  console.log('dims',boardSize * playerSize)
+
   return {
     gameOn: false,
+    collision: false,
     size: {
       boardSize: boardSize,
       playerSize: playerSize,
@@ -48,24 +50,19 @@ class Game extends Component {
     this.state = getDefaultState()
   }
 
-  changeGameStatus = (e) => {
-    let status
+  changeGameStatus = () => {
     if(this.state.gameOn == false){
       this.childInterval = setInterval(this.updateChildPosition, 50);
       this.dogInterval = setInterval(this.updateDogPosition, 100);
-      status = 'ON'
     }
     else{
       clearInterval(this.childInterval);
       clearInterval(this.dogInterval);
-      status = 'OFF'
     }
     this.setState(state => ({
       gameOn: !state.gameOn
     }))
   }
-
-
 
   updateChildPosition = () => {
     const maxDirCount = 7
@@ -183,13 +180,14 @@ class Game extends Component {
       topMatch = true
     }
 
-    console.log(leftMatch)
-    console.log(topMatch)
-
     if(leftMatch && topMatch){
-      alert("hero cat")
-      alert(`$`)
+      this.setState({
+        collision: true
+      })
+      alert("you're a hero")
+
     }
+
   }
 
   componentDidMount(){
@@ -204,6 +202,7 @@ class Game extends Component {
     return(
       <div id='imgs-wrapper'>
         <Background />
+        {this.state.collision && <Status />}
         <Cat
           positions={this.state.positions.cat}
           changeGameStatus={this.changeGameStatus}
