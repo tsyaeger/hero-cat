@@ -1,5 +1,5 @@
 import React from 'react';
-import dog from './dog-svg-2/dog-svg-2-transparent.png'
+import dog from '../assets/dog-svg-2/dog-svg-2-transparent.png'
 
 
 const Dog = ({positions}) => {

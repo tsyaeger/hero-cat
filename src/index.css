@@ -47,31 +47,44 @@ code {
   }
 } */
 
-html {
-  margin: 0;
-}
+
+
+
 
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
-body {
-  margin: auto;
-  padding: 0;
+html, body {
+  /* margin: auto;
+  padding: 0; */
   display: block;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Open Sans', sans-serif;
   /* min-height: 100vh; */
   overflow: hidden;
+
+  height:  100%;
+  margin:  0px auto;
+  padding: 0px auto;
+}
+
+#root {
+  height: 100%;
 }
 
 #page-wrapper {
+  height: 100%;
+}
 
+#game-wrapper {
+  height: 100%;
 }
 
 #imgs-wrapper {
   /* position: relative; */
+  height: 100%;
 }
 
 

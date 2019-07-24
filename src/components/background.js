@@ -1,5 +1,5 @@
 import React from 'react';
-import imageUrl from './suburb.jpg';
+import imageUrl from '../assets/suburb.jpg';
 
 const Background = () => {
   return (

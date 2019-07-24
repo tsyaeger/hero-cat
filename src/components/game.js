@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { UP, DOWN, LEFT, RIGHT } from './../helpers/constants';
 import Status from './status'
-import Background from './background'
+// import Background from './background'
 import Cat from './cat';
 import Dog from './dog';
 import Child from './child';
@@ -51,7 +51,7 @@ class Game extends Component {
   }
 
   changeGameStatus = () => {
-    if(this.state.gameOn == false){
+    if(this.state.gameOn === false){
       this.childInterval = setInterval(this.updateChildPosition, 50);
       this.dogInterval = setInterval(this.updateDogPosition, 100);
     }
@@ -66,7 +66,7 @@ class Game extends Component {
 
   updateChildPosition = () => {
     const maxDirCount = 7
-    const { childSpeed, positions: { child, dog }, size: { playerSize, maxDim }} = this.state;
+    const { childSpeed, positions: { child }, size: { playerSize, maxDim }} = this.state;
     let direction = (child.dirCount >= maxDirCount) ? this.getRandomDirection() : child.currentDirection
 
     //handle boundaries
@@ -200,18 +200,18 @@ class Game extends Component {
 
   render(){
     return(
+      <div>
+      {this.state.collision && <Status />}
       <div id='imgs-wrapper'>
-        <Background />
-        {this.state.collision && <Status />}
+
         <Cat
           positions={this.state.positions.cat}
           changeGameStatus={this.changeGameStatus}
           handleCatMovement={this.handleCatMovement}
         />
-        <Dog
-          positions={this.state.positions.dog}
-        />
-        <Child positions={this.state.positions.child}/>
+        <Dog positions={this.state.positions.dog} />
+        <Child positions={this.state.positions.child} />
+      </div>
       </div>
     )
   }

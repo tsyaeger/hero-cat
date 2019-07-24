@@ -32,24 +32,6 @@
   }
 } */
 
-html {
-  margin: 0;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: auto;
-  padding: 0;
-  display: block;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'Open Sans', sans-serif;
-  /* min-height: 100vh; */
-  overflow: hidden;
-}
 
 #page-wrapper {
   width: 100%;

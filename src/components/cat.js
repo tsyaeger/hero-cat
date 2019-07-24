@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import cat from './cat-svg-5/cat-svg-5-transparent.png'
+import cat from '../assets/cat-svg-5/cat-svg-5-transparent.png'
 
 class Cat extends Component {
 

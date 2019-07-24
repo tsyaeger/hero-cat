@@ -1,5 +1,5 @@
 import React from 'react';
-import child from './clip-lip-child-3/clip-lip-child-3-transparent.png'
+import child from '../assets/clip-lip-child-3/clip-lip-child-3-transparent.png'
 
 
 const Child = ({positions}) => {
